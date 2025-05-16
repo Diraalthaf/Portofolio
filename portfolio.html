@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Portofolio</title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f9fafb;
+    color: #292929;
+    line-height: 1.6;
+  }
+  a {
+    color: #810602;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* Header & Navigation */
+  header {
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .container {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+  }
+  .logo {
+    font-weight: 700;
+    font-size: 1.7rem;
+    color: #810602;
+    letter-spacing: 2px;
+  }
+  ul.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  ul.nav-links li {
+    margin-left: 25px;
+  }
+  ul.nav-links li a {
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 6px 0;
+    position: relative;
+  }
+  ul.nav-links li a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #810602;
+    transition: width 0.3s ease;
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+  }
+  ul.nav-links li a:hover::after {
+    width: 100%;
+  }
+
+  /* Hamburger */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  .hamburger span {
+    height: 3px;
+    width: 25px;
+    background: #810602;
+    margin-bottom: 5px;
+    border-radius: 5px;
+  }
+
+  /* Sections */
+  section {
+    padding: 60px 20px;
+  }
+  section.about {
+    background: #fde3e3;
+    color: #222;
+  }
+  section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #810602;
+  }
+  .about-content {
+    max-width: 700px;
+    margin: auto;
+    font-size: 1.1rem;
+  }
+
+  /* Skills */
+  .skills-list {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+  }
+  .skill-item {
+    background: #810602;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 25px;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(117, 1, 1, 0.3);
+    transition: background 0.3s ease;
+  }
+  .skill-item:hover {
+    background: #680502;
+  }
+
+  /* Projects */
+  .projects-grid {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
+    gap: 25px;
+  }
+  .project-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+  }
+  .project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
+  .project-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+  .project-content {
+    padding: 15px 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .project-title {
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #810602;
+  }
+  .project-description {
+    flex-grow: 1;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    color: #444;
+  }
+  .project-links {
+    margin-top: 15px;
+  }
+  .project-links a {
+    margin-right: 15px;
+    font-weight: 600;
+  }
+
+  /* Contact */
+  .contact-info {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.1rem;
+  }
+  .contact-info a {
+    display: inline-block;
+    margin: 15px 10px;
+    font-weight: 700;
+    color: #810602;
+    transition: color 0.3s ease;
+  }
+  .contact-info a:hover {
+    color: #640502;
+  }
+
+  /* Footer */
+  footer {
+    background: #810602;
+    color: white;
+    text-align: center;
+    padding: 20px 10px;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    ul.nav-links {
+      position: fixed;
+      top: 60px;
+      right: 0;
+      background: #810602;
+      height: calc(100% - 60px);
+      width: 220px;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      flex-direction: column;
+      padding-top: 20px;
+      z-index: 999;
+    }
+    ul.nav-links.show {
+      transform: translateX(0);
+    }
+    ul.nav-links li {
+      margin: 15px 0;
+      margin-left: 0;
+    }
+    ul.nav-links li a {
+      color: white;
+      font-size: 1.2rem;
+    }
+    ul.nav-links li a::after {
+      display: none;
+    }
+    .hamburger {
+      display: flex;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <nav>
+      <div class="logo">Portofolio</div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="hamburger" id="hamburger" aria-label="Toggle navigation menu" role="button" tabindex="0">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section id="about" class="about">
+    <div class="container">
+      <h2>About Me</h2>
+      <div class="about-content">
+        <p>Halo! Saya Andira Althaf Aryaga, siswa dari SMK Mahardhika jurusan Rekayasa Perangkat Lunak. Saya memiliki minat besar dalam dunia web development, khususnya dalam membangun tampilan antarmuka yang menarik, fungsional dan Responsif.
+        <br>Saya senang mempelajari teknologi baru, mencoba tantangan dalam coding, dan terus mengasah kemampuan saya dalam membuat aplikasi berbasis web. Ke depannya, saya ingin menjadi web developer profesional yang bisa memberikan solusi kreatif dan efisien untuk berbagai kebutuhan digital.
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="container">
+      <h2>Skills</h2>
+      <div class="skills-list" aria-label="Skills list">
+        <div class="skill-item" tabindex="0">HTML</div>
+        <div class="skill-item" tabindex="0">PHP</div>
+        <div class="skill-item" tabindex="0">CSS</div>
+        <div class="skill-item" tabindex="0">JavaScript</div>
+        <div class="skill-item" tabindex="0">React</div>
+        <div class="skill-item" tabindex="0">SQL</div>
+        <div class="skill-item" tabindex="0">Responsive Design</div>
+        <div class="skill-item" tabindex="0">After Effect</div>
+        <div class="skill-item" tabindex="0">Alight Motion</div>
+        <div class="skill-item" tabindex="0">Filmora</div>
+        <div class="skill-item" tabindex="0">Photoshop</div>
+        <div class="skill-item" tabindex="0">Adobe Ilustrator</div>
+        <div class="skill-item" tabindex="0">Microsoft Word</div>
+        <div class="skill-item" tabindex="0">Microsoft PowerPoint</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <h2>Projects</h2>
+      <div class="projects-grid">
+        <article class="project-card" tabindex="0" aria-label="Project: Perpus Digital">
+          <img src="https://art.ngfiles.com/images/2891000/2891329_citrusmillie_the-willow-library-pixel-art-wallpaper.png?f1669689511" alt="Perpus Digital" class="project-image" />
+          <div class="project-content">
+            <h3 class="project-title">Perpus Digital v1.0</h3>
+            <p class="project-description">Aplikasi Perpustakaan sederhana
+                berbasis website web yang dapat digunakan untuk mengelola berbagai aktifitas di perpustakaan, mulai dari penyimpanan data buku hingga proses peminjaman</p>
+            <div class="project-links">
+              <a href="#" target="_blank" rel="noopener">Live Demo</a>
+              <a href="https://github.com/Diraalthaf/PerpusDigital" target="_blank" rel="noopener">Source Code</a>
+            </div>
+          </div>
+        </article>
+        <article class="project-card" tabindex="0" aria-label="Project: HBD typhographi">
+          <img src="https://i.pinimg.com/736x/62/e6/21/62e621e2b989c6aba91649221f09d83b.jpg" alt="HBD typhographi" class="project-image" />
+          <div class="project-content">
+            <h3 class="project-title">Happy Birthday v1.0</h3>
+            <p class="project-description">Hadiah yang cocok untuk seseorang</p>
+            <div class="project-links">
+              <a href="https://Diraalthaf.github.io/Nasi-Kuning " target="_blank" rel="noopener">Live Demo</a>
+              <a href="https://github.com/Diraalthaf/Nasi-Kuning" target="_blank" rel="noopener">Source Code</a>
+            </div>
+          </div>
+        </article>
+        <article class="project-card" tabindex="0" aria-label="Project: Animated Weather">
+          <img src="img/weather.png"alt="Animated Weather" class="project-image" />
+          <div class="project-content">
+            <h3 class="project-title">Animated Weather</h3>
+            <p class="project-description">Animasi Aplikasi Cuaca</p>
+            <div class="project-links">
+              <a href="#" target="_blank" rel="noopener">Live Demo</a>
+              <a href="https://github.com/Diraalthaf/Animated-Weather"target="_blank" rel="noopener">Source Code</a>
+            </div>
+          </div>
+        </article>
+         <article class="project-card" tabindex="0" aria-label="Project: Solar-Eclipse" >
+          <img src="img/Eclipse.png"alt="Solar-Eclipse" class="project-image" />
+          <div class="project-content">
+            <h3 class="project-title">Solar-Eclipse</h3>
+            <p class="project-description">Simulasi Gerhana Matahari</p>
+            <div class="project-links">
+              <a href="#" target="_blank" rel="noopener">Live Demo</a>
+              <a href="https://github.com/Diraalthaf/Solar-Eclipse" target="_blank" rel="noopener">Source Code</a>
+            </div>
+          </div>
+        </article>
+        <article class="project-card" tabindex="0" aria-label="Iconic Tab Bar - Pure CSS" >
+          <img src="img/TabBar.png" alt="Iconic Tab Bar - Pure CSS" class="project-image" />
+          <div class="project-content">
+            <h3 class="project-title">Iconic Tab Bar - Pure CSS</h3>
+            <p class="project-description">Tab Bar Full Mengunakan CSS</p>
+            <div class="project-links">
+              <a href="#" target="_blank" rel="noopener">Live Demo</a>
+              <a href="https://github.com/Diraalthaf/Tab-Bar-Pure-CSS" target="_blank" rel="noopener">Source Code</a>
+            </div>
+          </div>
+        </article>
+        <article class="project-card" tabindex="0" aria-label="3D Room - Pure CSS" >
+          <img src="img/3Droom.png" alt="3D Room - Pure CSS" class="project-image" />
+          <div class="project-content">
+            <h3 class="project-title">3D Room - Pure CSS</h3>
+            <p class="project-description">Studio Impian</p>
+            <div class="project-links">
+              <a href="#" target="_blank" rel="noopener">Live Demo</a>
+              <a href="https://github.com/Diraalthaf/3D-Room---Pure-CSS.git" target="_blank" rel="noopener">Source Code</a>
+            </div>
+          </div>
+        </article>
+        <article class="project-card" tabindex="0" aria-label="Mograph - double take x goodnight n go" >
+          <img src="img/Mograph.png" alt="Mograph - double take x goodnight n go" class="project-image" />
+          <div class="project-content">
+            <h3 class="project-title">Mograph - double take x goodnight n go</h3>
+            <p class="project-description">Diedit Menggunakan Alight Motion</p>
+            <div class="project-links">
+              <a href="https://www.tiktok.com/@straytrill/video/7397191967437868293?is_from_webapp=1&sender_device=pc&web_id=7485004339590202888" target="_blank" rel="noopener">Live Demo</a>
+            </div>
+          </div>
+        </article>
+        <article class="project-card" tabindex="0" aria-label="AMV - Loopvember22" >
+          <img src="img/AMV.png" alt="AMV - Loopvember22" class="project-image" />
+          <div class="project-content">
+            <h3 class="project-title">AMV - Loopvember22</h3>
+            <p class="project-description">Diedit Menggunakan After Effect</p>
+            <div class="project-links">
+              <a href="https://www.tiktok.com/@straytrill/video/7167511331493530907?is_from_webapp=1&sender_device=pc&web_id=7485004339590202888" target="_blank" rel="noopener">Live Demo</a>
+            </div>
+          </div>
+        </article>
+        <article class="project-card" tabindex="0" aria-label="Special Delicious Burger" >
+          <img src="img/poster.webp" alt="Special Delicious Burger" class="project-image" />
+          <div class="project-content">
+            <h3 class="project-title">Special Delicious Burger</h3>
+            <p class="project-description">Dibuat Menggunakan Adobe Ilustrator dan Photoshop</p>
+            <div class="project-links">
+              <a href="https://www.instagram.com/p/CzvUxrEL1KO/?img_index=1&igsh=MW10dDU1aXppaDJkNg==" target="_blank" rel="noopener">Live Demo</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h2>Contact</h2>
+      <div class="contact-info">
+        <p>You can reach me via email or find me on social media:</p>
+        <a href="mailto:andiraalthafaryaga@gmail.com" target="_blank" rel="noopener">andiraalthafaryaga@gmail.com</a> |
+        <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener">LinkedIn</a> |
+        <a href="https://github.com/Diraalthaf" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  &copy; 2025 Andira Althaf Aryaga. All rights reserved.
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+  });
+
+  // Accessibility: toggle menu with enter key
+  hamburger.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === " ") {
+      e.preventDefault();
+      navLinks.classList.toggle('show');
+    }
+  });
+
+  // Close menu when clicking a nav link (mobile)
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      if(navLinks.classList.contains('show')) {
+        navLinks.classList.remove('show');
+      }
+    });
+  });
+</script>
+</body>
+</html>
